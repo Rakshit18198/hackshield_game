@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  background: #000;
+  color: #fff;
+  height: 100vh;
+}
+
+.landing-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 3rem;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffffaa;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #ccc;
+}
+
+.button-group {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+button {
+  background-color: transparent;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #00ffff;
+  color: #000;
+  box-shadow: 0 0 10px #00ffffaa;
+}
+
+.explore-wrapper {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 10;
+  text-align: right;
+}
+
+.explore-toggle {
+  background-color: transparent;
+  color: #00ffff;
+  border: 2px dashed #00ffff;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.explore-toggle:hover {
+  background-color: #00ffff;
+  color: #000;
+  box-shadow: 0 0 12px #00ffffaa;
+}
+
+.explore-menu {
+  background: #111;
+  border: 1px solid #00ffff88;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 0 10px #00ffff44;
+}
+
+.explore-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+}
+
+.explore-menu li {
+  margin: 0.4rem 0;
+}
+
+.explore-menu a {
+  color: #00ffff;
+  text-decoration: none;
+}
+
+.explore-menu a:hover {
+  text-decoration: underline;
+}

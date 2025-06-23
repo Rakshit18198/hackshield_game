@@ -1,0 +1,58 @@
+/* src/SupportPage.css */
+.support-container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 16px rgba(0, 87, 183, 0.15);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.support-container h1 {
+  text-align: center;
+  color: #0057b7;
+  margin-bottom: 10px;
+}
+
+.support-subtext {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.support-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.support-form input,
+.support-form textarea {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.support-form input:focus,
+.support-form textarea:focus {
+  border-color: #0057b7;
+}
+
+.support-form button {
+  background-color: #0057b7;
+  color: white;
+  padding: 14px;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.support-form button:hover {
+  background-color: #003f8a;
+}

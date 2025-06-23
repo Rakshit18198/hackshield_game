@@ -1,0 +1,54 @@
+/* src/AchievementsPage.css */
+.achievements-container {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.achievements-container h1 {
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.achievement-card {
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #f3f3f3;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.achievement-card h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.achievement-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.unlocked {
+  border: 2px solid #28a745;
+}
+
+.locked {
+  border: 2px dashed #888;
+  background-color: #eee;
+  color: #aaa;
+}
