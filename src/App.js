@@ -2,6 +2,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// import ExploreMenu from './ExploreMenu';
+
 import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import DashboardPage from './DashboardPage';
@@ -18,12 +20,20 @@ import RegisterPage from './RegisterPage';
 import SettingsPage from './SettingsPage';
 import InventoryPage from './InventoryPage';
 import DailyChallengesPage from './DailyChallengesPage';
+import ShopPage from './ShopPage';
+import NotificationPage from './NotificationsPage';
+import ForgotPasswordPage from './ForgotPasswordPage';
+
+
+
+
 
 
 
 const App = () => {
   return (
     <Router>
+      {/* <ExploreMenu /> */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -41,6 +51,9 @@ const App = () => {
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/inventory" element={<InventoryPage />} />
         <Route path="/dailychallenges" element={<DailyChallengesPage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/notifications" element={<NotificationPage />} />
+        <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
       </Routes>
     </Router>
   );

@@ -1,109 +1,102 @@
 body {
   margin: 0;
   font-family: 'Courier New', monospace;
-  background: #000;
+  background-color: #000;
   color: #fff;
-  height: 100vh;
 }
 
-.landing-container {
-  position: relative;
+.landing-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   text-align: center;
+  position: relative;
   padding: 2rem;
 }
 
-.title {
-  font-size: 3rem;
+h1 {
+  font-size: 3.5rem;
   color: #00ffff;
-  text-shadow: 0 0 10px #00ffffaa;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 12px #00ffffaa;
 }
 
-.subtitle {
+p {
   font-size: 1.2rem;
-  margin-top: 0.5rem;
   color: #ccc;
+  margin-bottom: 2rem;
 }
 
-.button-group {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-button {
+/* Explore button in top-right */
+.explore-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   background-color: transparent;
   color: #00ffff;
   border: 2px solid #00ffff;
-  padding: 0.6rem 1.5rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-button:hover {
+.explore-button:hover {
   background-color: #00ffff;
   color: #000;
   box-shadow: 0 0 10px #00ffffaa;
 }
 
-.explore-wrapper {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  z-index: 10;
-  text-align: right;
+/* Explore menu */
+.explore-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  max-width: 800px;
 }
 
-.explore-toggle {
+.explore-menu button {
   background-color: transparent;
   color: #00ffff;
-  border: 2px dashed #00ffff;
+  border: 2px solid #00ffff;
   padding: 0.5rem 1.2rem;
-  font-size: 0.95rem;
-  border-radius: 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
-.explore-toggle:hover {
+.explore-menu button:hover {
   background-color: #00ffff;
   color: #000;
-  box-shadow: 0 0 12px #00ffffaa;
+  box-shadow: 0 0 10px #00ffffaa;
 }
 
-.explore-menu {
-  background: #111;
-  border: 1px solid #00ffff88;
-  border-radius: 8px;
-  margin-top: 0.5rem;
-  padding: 0.8rem 1rem;
-  box-shadow: 0 0 10px #00ffff44;
+/* Login/Register buttons below text */
+.bottom-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.explore-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: right;
-}
-
-.explore-menu li {
-  margin: 0.4rem 0;
-}
-
-.explore-menu a {
+.nav-button {
+  background-color: transparent;
   color: #00ffff;
-  text-decoration: none;
+  border: 2px solid #00ffff;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.explore-menu a:hover {
-  text-decoration: underline;
+.nav-button:hover {
+  background-color: #00ffff;
+  color: #000;
+  box-shadow: 0 0 10px #00ffffaa;
 }

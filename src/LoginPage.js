@@ -1,24 +1,24 @@
 // src/pages/LoginPage.js
-import React, { useState } from 'react';
-import './LoginPage.css';
+import React, { useState } from "react";
+import "./LoginPage.css";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: Integrate with backend
     console.log({ email, password, remember });
-    alert('Login submitted');
+    alert("Login submitted");
   };
 
   return (
     <div className="login-page">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login to HackShield</h2>
-        
+
         <label>Email</label>
         <input
           type="email"
@@ -46,7 +46,9 @@ const LoginPage = () => {
             />
             Remember Me
           </label>
-          <a href="/reset-password" className="forgot">Forgot Password?</a>
+          <a href="/forgot-password" className="forgot">
+            Forgot Password?
+          </a>
         </div>
 
         <button type="submit">Login</button>
