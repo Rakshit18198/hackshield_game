@@ -35,6 +35,19 @@ const LandingPage = () => {
           <button onClick={() => navigate('/dailychallenges')}>Daily Challenges</button>
           <button onClick={() => navigate('/shop')}>Shop</button>
           <button onClick={() => navigate('/notifications')}>Notifications</button>
+          <button onClick={() => navigate('/mission-detail')}>Mission Detail </button>
+          <button onClick={() => navigate('/mission-complete')}>Mission Complete </button>
+          <button onClick={() => navigate('/interactive')}>Interactive Game </button>
+          <button onClick={() => navigate('/code-challenge')}>Code Challenge </button>
+          <button onClick={() => navigate('/delete-account')}>DeleteAccountPage </button>
+          <button onClick={() => navigate('/email-verification')}>Emailverification page </button>
+          <button onClick={() => navigate('/mission-briefing')}>Mission Briefing Page </button>
+          <button onClick={() => navigate('/profile')}>ProfilePage </button>
+          <button onClick={() => navigate('/quiz')}>QuizPage </button>
+          <button onClick={() => navigate('/role-select')}>RoleSelectPage </button>
+          <button onClick={() => navigate('/skill-tree')}>SkillTreePage </button>
+          <button onClick={() => navigate('/terminal-sim')}>TerminalSimPage </button>
+          <button onClick={() => navigate('/training-hub')}>TrainingHubPage </button>
         </div>
       )}
 

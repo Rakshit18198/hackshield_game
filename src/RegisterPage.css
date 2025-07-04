@@ -44,14 +44,14 @@ body {
   padding: 0.6rem;
   border-radius: 6px;
   border: none;
-  background-color: #111;
-  color: #00ffcc;
+  background-color: white;
+  color: black;
   outline: none;
   font-size: 1rem;
 }
 
 .register-form input::placeholder {
-  color: #00ffcc88;
+  color: black;
 }
 
 .register-form button {

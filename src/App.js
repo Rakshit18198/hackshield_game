@@ -23,7 +23,20 @@ import DailyChallengesPage from './DailyChallengesPage';
 import ShopPage from './ShopPage';
 import NotificationPage from './NotificationsPage';
 import ForgotPasswordPage from './ForgotPasswordPage';
-
+import ResetPasswordPage from './ResetPasswordPage';
+import MissionDetailPage from './MissionDetailPage';
+import InteractiveGamePage from './InteractiveGamePage';
+import MissionCompletePage from './MissionCompletePage';
+import CodeChallengePage from './CodeChallengePage';
+import CyberNewsPage from './CyberNewsPage';
+import DeleteAccountPage from './DeleteAccountPage';
+import EmailVerificationPage from './EmailVerificationPage';
+import MissionBriefingPage from './MissionBriefingPage';
+import ProfilePage from './ProfilePage';
+import RoleSelectPage from './RoleSelectPage';
+import SkillTreePage from './SkillTreePage';
+import TerminalSimPage from './TerminalSimPage';
+import TrainingHubPage from './TrainingHubPage'
 
 
 
@@ -53,7 +66,22 @@ const App = () => {
         <Route path="/dailychallenges" element={<DailyChallengesPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/notifications" element={<NotificationPage />} />
-        <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/mission-detail" element={<MissionDetailPage />} />
+        <Route path="/interactive" element={<InteractiveGamePage />} />
+        <Route path="/mission-complete" element={<MissionCompletePage />} />
+        <Route path="/code-challenge" element={<CodeChallengePage />} />
+        <Route path="/cyber-news" element={<CyberNewsPage />} />
+        <Route path="/delete-account" element={<DeleteAccountPage />} />
+        <Route path="/email-verification" element={<EmailVerificationPage />} />
+        <Route path="/mission-briefing" element={<MissionBriefingPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/role-select" element={<RoleSelectPage />} />
+        <Route path='/skill-tree' element={<SkillTreePage />} />
+        <Route path='/terminal-sim' element={<TerminalSimPage/>}/>
+        <Route path='/training-hub' element={<TrainingHubPage/>}/>
+
       </Routes>
     </Router>
   );
