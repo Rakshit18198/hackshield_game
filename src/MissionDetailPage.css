@@ -1,0 +1,59 @@
+/* src/pages/MissionDetailPage.css */
+.mission-detail-container {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, #0f0f0f 0%, #010101 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.neon-box {
+  max-width: 700px;
+  background: rgba(20, 20, 30, 0.6);
+  border: 2px solid #00fff7;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00fff7, 0 0 60px #00fff7;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.mission-title {
+  font-size: 2rem;
+  color: #00fff7;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px #00fff7;
+}
+
+.mission-description {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #d0faff;
+}
+
+.mission-info {
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.start-btn {
+  background: #ff0055;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px #ff0055, 0 0 30px #ff0055;
+}
+
+.start-btn:hover {
+  background: #ff3377;
+  box-shadow: 0 0 15px #ff3377, 0 0 40px #ff3377;
+}
