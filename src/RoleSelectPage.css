@@ -1,0 +1,64 @@
+.role-select-container {
+  text-align: center;
+  padding: 3rem;
+  color: white;
+}
+
+.role-subtitle {
+  font-style: italic;
+  margin-bottom: 2rem;
+  color: #aaf;
+}
+
+.role-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.role-card {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 15px;
+  width: 250px;
+  cursor: pointer;
+  transition: transform 0.3s, border 0.3s;
+  border: 2px solid transparent;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+.role-card:hover {
+  transform: translateY(-5px);
+}
+
+.role-card.selected {
+  border: 2px solid #00ffff;
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.role-icon {
+  margin-bottom: 1rem;
+  color: #00ffff;
+}
+
+.confirm-role-btn {
+  padding: 0.7rem 2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background: #00ffffaa;
+  color: black;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.confirm-role-btn:hover {
+  background: #00ffffdd;
+}
+
+.confirm-role-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
