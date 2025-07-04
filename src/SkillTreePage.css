@@ -1,0 +1,69 @@
+.skilltree-container {
+  padding: 2rem;
+  color: white;
+  text-align: center;
+}
+
+.tree-desc {
+  margin-bottom: 2rem;
+  font-style: italic;
+  color: #aaf;
+}
+
+.skill-tree {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 3rem;
+}
+
+.skill-node {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  transition: transform 0.3s;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  position: relative;
+}
+
+.skill-node:hover {
+  transform: scale(1.05);
+}
+
+.skill-completed {
+  background-color: #00ff88;
+  color: black;
+}
+
+.skill-unlocked {
+  background-color: #00ffff;
+  color: black;
+}
+
+.skill-locked {
+  background-color: #444;
+  color: #ccc;
+}
+
+.status-label {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.connector-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

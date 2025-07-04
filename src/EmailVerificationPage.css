@@ -1,0 +1,44 @@
+.verification-container {
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  text-align: center;
+}
+
+.verification-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.verification-container p {
+  margin-bottom: 1rem;
+}
+
+.verification-container button {
+  padding: 0.75rem 2rem;
+  background: #00ffff99;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.verification-container button:hover {
+  background: #00ffffcc;
+}
+
+.success-msg {
+  margin-top: 1rem;
+  color: #00ff99;
+}
+
+.error-msg {
+  margin-top: 1rem;
+  color: #ff4f4f;
+}
