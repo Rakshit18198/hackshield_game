@@ -1,0 +1,351 @@
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const Game = () => {
+  const { gameId } = useParams();
+  const navigate = useNavigate();
+  
+  const [game, setGame] = useState(null);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [userAnswer, setUserAnswer] = useState('');
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(null);
+  const [gameCompleted, setGameCompleted] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    initializeGame();
+  }, [gameId, navigate]);
+
+  useEffect(() => {
+    if (timeLeft !== null && timeLeft > 0 && !gameCompleted) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0 && !gameCompleted) {
+      handleTimeout();
+    }
+  }, [timeLeft, gameCompleted]);
+
+  const initializeGame = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      // Get game details
+      const gameResponse = await axios.get(`http://localhost:3000/api/games/${gameId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setGame(gameResponse.data);
+
+      // Start game session
+      const sessionResponse = await axios.post(`http://localhost:3000/api/games/${gameId}/start`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setSession(sessionResponse.data);
+      
+      // Set timer for first question
+      if (gameResponse.data.questions[0]?.time_limit) {
+        setTimeLeft(gameResponse.data.questions[0].time_limit);
+      }
+      
+      setLoading(false);
+    } catch (error) {
+      console.error('Error initializing game:', error);
+      navigate('/dashboard');
+    }
+  };
+
+  const handleTimeout = () => {
+    setShowResult(true);
+    setIsCorrect(false);
+    setTimeout(() => {
+      handleNextQuestion();
+    }, 2000);
+  };
+
+  const handleSubmitAnswer = async () => {
+    if (submitting) return;
+    
+    setSubmitting(true);
+    
+    try {
+      const token = localStorage.getItem('token');
+      const question = game.questions[currentQuestion];
+      
+      let answerData = {
+        sessionId: session.id,
+        questionId: question.id
+      };
+
+      if (question.question_type === 'mcq') {
+        answerData.selectedOptionId = selectedOption;
+      } else {
+        answerData.userAnswer = userAnswer;
+      }
+
+      const response = await axios.post(`http://localhost:3000/api/games/${gameId}/answer`, answerData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const result = response.data;
+      setIsCorrect(result.isCorrect);
+      setScore(score + (result.pointsEarned || 0));
+      setShowResult(true);
+
+      setTimeout(() => {
+        handleNextQuestion();
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting answer:', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    setShowResult(false);
+    setUserAnswer('');
+    setSelectedOption(null);
+    
+    if (currentQuestion + 1 < game.questions.length) {
+      setCurrentQuestion(currentQuestion + 1);
+      const nextQuestion = game.questions[currentQuestion + 1];
+      if (nextQuestion.time_limit) {
+        setTimeLeft(nextQuestion.time_limit);
+      } else {
+        setTimeLeft(null);
+      }
+    } else {
+      completeGame();
+    }
+  };
+
+  const completeGame = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(`http://localhost:3000/api/games/${gameId}/complete`, {
+        sessionId: session.id,
+        totalScore: score
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      setGameCompleted(true);
+    } catch (error) {
+      console.error('Error completing game:', error);
+    }
+  };
+
+  const renderQuestion = () => {
+    if (!game || !game.questions[currentQuestion]) return null;
+    
+    const question = game.questions[currentQuestion];
+    
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <div className="text-sm text-gray-600">
+            Question {currentQuestion + 1} of {game.questions.length}
+          </div>
+          {timeLeft !== null && (
+            <div className="text-sm font-medium text-gray-900">
+              Time: {timeLeft}s
+            </div>
+          )}
+        </div>
+
+        <div className="card p-8">
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              {question.question_text}
+            </h3>
+            
+            {question.question_type === 'mcq' && (
+              <div className="space-y-3">
+                {question.options?.map((option) => (
+                  <label
+                    key={option.id}
+                    className={`flex items-center p-4 border rounded-lg cursor-pointer transition-colors duration-200 ${
+                      selectedOption === option.id
+                        ? 'border-primary-500 bg-primary-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="option"
+                      value={option.id}
+                      checked={selectedOption === option.id}
+                      onChange={(e) => setSelectedOption(parseInt(e.target.value))}
+                      className="sr-only"
+                    />
+                    <div className="flex items-center">
+                      <div className={`w-4 h-4 border-2 rounded-full mr-3 ${
+                        selectedOption === option.id
+                          ? 'border-primary-500 bg-primary-500'
+                          : 'border-gray-300'
+                      }`}>
+                        {selectedOption === option.id && (
+                          <div className="w-2 h-2 bg-white rounded-full m-0.5"></div>
+                        )}
+                      </div>
+                      <span className="text-gray-900">{option.option_text}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            )}
+            
+            {question.question_type === 'true_false' && (
+              <div className="space-y-3">
+                {['true', 'false'].map((option) => (
+                  <label
+                    key={option}
+                    className={`flex items-center p-4 border rounded-lg cursor-pointer transition-colors duration-200 ${
+                      userAnswer === option
+                        ? 'border-primary-500 bg-primary-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="trueFalse"
+                      value={option}
+                      checked={userAnswer === option}
+                      onChange={(e) => setUserAnswer(e.target.value)}
+                      className="sr-only"
+                    />
+                    <div className="flex items-center">
+                      <div className={`w-4 h-4 border-2 rounded-full mr-3 ${
+                        userAnswer === option
+                          ? 'border-primary-500 bg-primary-500'
+                          : 'border-gray-300'
+                      }`}>
+                        {userAnswer === option && (
+                          <div className="w-2 h-2 bg-white rounded-full m-0.5"></div>
+                        )}
+                      </div>
+                      <span className="text-gray-900 capitalize">{option}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            )}
+            
+            {question.question_type === 'fill_blank' && (
+              <div>
+                <input
+                  type="text"
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  placeholder="Enter your answer..."
+                  className="input-field"
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-gray-600">
+              Points: {question.points}
+            </div>
+            <button
+              onClick={handleSubmitAnswer}
+              disabled={submitting || 
+                (question.question_type === 'mcq' && !selectedOption) ||
+                (question.question_type === 'true_false' && !userAnswer) ||
+                (question.question_type === 'fill_blank' && !userAnswer.trim())
+              }
+              className="btn-primary"
+            >
+              {submitting ? 'Submitting...' : 'Submit Answer'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderResult = () => {
+    return (
+      <div className="card p-8 text-center">
+        <div className={`text-6xl mb-4 ${isCorrect ? 'text-green-500' : 'text-red-500'}`}>
+          {isCorrect ? '✅' : '❌'}
+        </div>
+        <h3 className={`text-2xl font-bold mb-2 ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+          {isCorrect ? 'Correct!' : 'Incorrect'}
+        </h3>
+        <p className="text-gray-600">
+          {isCorrect ? 'Great job! You got it right.' : 'Better luck next time!'}
+        </p>
+      </div>
+    );
+  };
+
+  const renderGameComplete = () => {
+    return (
+      <div className="card p-8 text-center">
+        <div className="text-6xl mb-4 text-green-500">🎉</div>
+        <h3 className="text-2xl font-bold mb-2 text-gray-900">Game Complete!</h3>
+        <p className="text-gray-600 mb-6">
+          Congratulations! You've completed the game.
+        </p>
+        <div className="bg-primary-50 rounded-lg p-6 mb-6">
+          <div className="text-3xl font-bold text-primary-600 mb-2">{score}</div>
+          <div className="text-sm text-gray-600">Total Score</div>
+        </div>
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="btn-primary"
+        >
+          Back to Dashboard
+        </button>
+      </div>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">{game?.name}</h1>
+            <p className="text-gray-600">Score: {score}</p>
+          </div>
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="btn-secondary"
+          >
+            Exit Game
+          </button>
+        </div>
+
+        {/* Game Content */}
+        {gameCompleted ? renderGameComplete() : 
+         showResult ? renderResult() : renderQuestion()}
+      </div>
+    </div>
+  );
+};
+
+export default Game;

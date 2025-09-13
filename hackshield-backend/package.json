@@ -1,0 +1,32 @@
+{
+  "name": "hackshield-backend",
+  "version": "1.0.0",
+  "description": "HackShield Backend API",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate": "node-pg-migrate",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down",
+    "migrate:create": "node-pg-migrate create"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@colyseus/monitor": "^0.16.7",
+    "bcryptjs": "^2.4.3",
+    "colyseus": "^0.16.4",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "node-pg-migrate": "^6.2.2",
+    "nodemailer": "^7.0.5",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
